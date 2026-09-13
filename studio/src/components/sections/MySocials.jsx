@@ -8,7 +8,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { AnimatePresence, motion, useReducedMotion, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
 
-const TRAIL_IMAGE_COUNT = 20;
+const TRAIL_IMAGE_COUNT = 22;
 
 const trailImages = Array.from({ length: TRAIL_IMAGE_COUNT }, (_, index) => `/socials/socials-${index + 1}.jpg`);
 
