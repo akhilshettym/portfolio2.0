@@ -15,6 +15,7 @@ import { useTheme } from "@/context/ThemeContext";
 import { getWeatherIconData } from "@/utils/stage";
 import { GiRabbit, GiTortoise } from "react-icons/gi";
 import { MOON_MAP, WEATHER_MAP } from "@/utils/basic";
+import { useDeviceType } from "@/hooks/useDeviceType";
 import { getControlModalStyles } from "@/utils/swatch";
 import { AnimatePresence, motion } from "framer-motion";
 import { HiMiniPause, HiMiniPlay } from "react-icons/hi2";
@@ -23,6 +24,7 @@ import { ASSET_CACHE, LOCATION_MODE, SCENE_CACHE } from "@/utils/storage";
 export default function ControlModal({ open, onClose, paused, isTier2, handleCloudControl, handleRestartIntroScene }) {
   const router = useRouter();
   const { theme } = useTheme();
+  const { isMobile } = useDeviceType();
 
   const weatherData = getWeatherIconData();
   const moonPhase = weatherData?.getMoonPhase;
@@ -73,6 +75,14 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
     }
   };
 
+  const handleTierSwitch = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("sys_tier");
+      localStorage.setItem("sys_tier", "tier_1");
+      window.location.reload();
+    }
+  };
+
   const themeStyles = getControlModalStyles;
   const styles = themeStyles[normalizedTheme] || themeStyles.light;
 
@@ -119,7 +129,7 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
             exit={{ opacity: 0, y: 10, scale: 0.97 }}
             transition={{ type: "spring", stiffness: 450, damping: 30 }}
             onMouseDown={(event) => event.stopPropagation()}
-            className={`flex w-full max-w-xl flex-col overflow-hidden border backdrop-blur-2xl ${styles.modal}`}>
+            className={`flex w-full max-w-xl flex-col border backdrop-blur-2xl ${styles.modal}`}>
             <div className={`shrink-0 flex items-start justify-between border-b px-5 py-3 ${styles.header}`}>
               <div>
                 <h2 className={`text-sm font-bold uppercase tracking-tighter ${styles.title}`}>Site Controls</h2>
@@ -128,9 +138,11 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
                 </p>
               </div>
 
-              <div className="ml-35 mt-1.5">
-                <ModeSwitch />
-              </div>
+              {!isMobile && (
+                <div className="ml-35 mt-1.5 hidden sm:block">
+                  <ModeSwitch />
+                </div>
+              )}
 
               <button
                 type="button"
@@ -141,73 +153,104 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 p-2 sm:gap-2 sm:p-3">
-              <ControlCard
-                icon={cloudsIcon}
-                value={cloudsValue}
-                description={cloudsDescription}
-                actionLabel="CONTROL"
-                disabled={isTier2}
-                onClick={handleCloudControl}
-                styles={styles}
-              />
-              <ControlCard
-                icon={limpIcon}
-                value={limpLabel}
-                description={limpDescription}
-                actionLabel="STATUS"
-                styles={styles}
-              />
-              <ControlCard
-                icon={<SiRevealdotjs size={12} />}
-                value="Run intro"
-                description="Trigger a full cinematic replay of the opening scene animation."
-                actionLabel="REPLAY"
-                onClick={handleRestartIntroScene}
-                styles={styles}
-              />
-              <ControlCard
-                icon={<WeatherGlyph size={15} />}
-                value={weatherLabel}
-                description="Synchronized in real-time with your local atmospheric conditions."
-                actionLabel="LIVE"
-                styles={styles}
-              />
-              <ControlCard
-                icon={<AiOutlineClear size={15} />}
-                value="Erase data"
-                description="Wipe custom scene preferences to restore the default layout state."
-                actionLabel="WIPE"
-                onClick={handleResetScene}
-                styles={styles}
-              />
-              <ControlCard
-                icon={<IoMdNuclear size={15} />}
-                value="Purge Storage"
-                description="Purge all local, session storage and analytics data, followed by a hard reset."
-                actionLabel="PURGE"
-                onClick={handlePurgeStorage}
-                styles={styles}
-              />
-              <ControlCard
-                icon={<MoonGlyph size={15} />}
-                value={moonLabel}
-                description="Live lunar phase tracking based on current astronomical data."
-                actionLabel="PHASE"
-                styles={styles}
-              />
-              <ControlCard
-                icon={<FiShield size={15} />}
-                value="Privacy Policy"
-                description="Discover how I collect, manage, and secure the data you share with me."
-                actionLabel="OPEN"
-                onClick={handleNavigation}
-                styles={styles}
-              />
+            <div className={`border-b px-2 py-2 sm:px-3 ${styles.divider}`}>
+              <h3 className={`px-2 pb-2 text-[10px] font-bold uppercase tracking-widest ${styles.title}`}>
+                Environment Data
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <ControlCard
+                  status="static"
+                  icon={<MoonGlyph size={15} />}
+                  value={moonLabel}
+                  description="Live lunar phase tracking based on current astronomical data."
+                  actionLabel="PHASE"
+                  styles={styles}
+                />
+                <ControlCard
+                  status="static"
+                  icon={<WeatherGlyph size={15} />}
+                  value={weatherLabel}
+                  description="Synchronized in real-time with your local atmospheric conditions."
+                  actionLabel="LIVE"
+                  styles={styles}
+                />
+                <ControlCard
+                  status="static"
+                  icon={limpIcon}
+                  value={limpLabel}
+                  description={limpDescription}
+                  actionLabel="STATUS"
+                  styles={styles}
+                />
+              </div>
+            </div>
+
+            <div className="px-2 py-2 sm:px-3">
+              <h3 className={`px-2 pb-2 text-[10px] font-bold uppercase tracking-widest ${styles.title}`}>
+                Active Controls
+              </h3>
+              <div className="grid grid-cols-2 gap-2">
+                <ControlCard
+                  status={isTier2 ? "disabled" : "active"}
+                  icon={cloudsIcon}
+                  value={cloudsValue}
+                  description={cloudsDescription}
+                  actionLabel="CONTROL"
+                  disabled={isTier2}
+                  onClick={handleCloudControl}
+                  styles={styles}
+                />
+                <ControlCard
+                  status="active"
+                  icon={<SiRevealdotjs size={12} />}
+                  value="Run intro"
+                  description="Trigger a full cinematic replay of the opening scene animation."
+                  actionLabel="REPLAY"
+                  onClick={handleRestartIntroScene}
+                  styles={styles}
+                />
+                <ControlCard
+                  status="active"
+                  icon={<AiOutlineClear size={15} />}
+                  value="Erase data"
+                  description="Wipe custom scene preferences to restore the default layout state."
+                  actionLabel="WIPE"
+                  onClick={handleResetScene}
+                  styles={styles}
+                />
+                <ControlCard
+                  status="active"
+                  icon={<IoMdNuclear size={15} />}
+                  value="Purge Storage"
+                  description="Purge all local, session storage and analytics data, followed by a hard reset."
+                  actionLabel="PURGE"
+                  onClick={handlePurgeStorage}
+                  styles={styles}
+                />
+                <ControlCard
+                  status={!isTier2 ? "disabled" : "active"}
+                  icon={<GiRabbit size={15} />}
+                  value="Perf Mode"
+                  description="Spin up the machine to performance mode for maximum visual fidelity."
+                  actionLabel="BOOST"
+                  disabled={!isTier2}
+                  onClick={handleTierSwitch}
+                  styles={styles}
+                />
+                <ControlCard
+                  status="active"
+                  icon={<FiShield size={15} />}
+                  value="Privacy Policy"
+                  description="Discover how I collect, manage, and secure the data you share with me."
+                  actionLabel="OPEN"
+                  onClick={handleNavigation}
+                  styles={styles}
+                />
+              </div>
             </div>
 
             <div className={`shrink-0 flex items-center justify-end border-t px-5 py-2.5 ${styles.divider}`}>
-              <div className={`flex items-center gap-2 text-[10px] ${styles.footer}`}>
+              <div className={`hidden sm:flex items-center gap-2 text-[10px] ${styles.footer}`}>
                 <span>Press</span>
                 <span className={`border px-1.5 py-0.5 text-[9px] font-semibold uppercase ${styles.key}`}>esc</span>
                 <span>to close</span>
@@ -220,46 +263,62 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
   );
 }
 
-function ControlCard({ icon, value, description, actionLabel, disabled = false, onClick, styles }) {
-  const isInteractive = !!onClick && !disabled;
+function ControlCard({ icon, value, description, actionLabel, disabled = false, onClick, styles, status }) {
+  const isInteractive = status !== "static";
   const Component = isInteractive ? "button" : "div";
+
+  const dotColor = status === "active" ? "bg-emerald-500" : status === "disabled" ? "bg-amber-500" : "bg-slate-500";
 
   return (
     <Component
       type={isInteractive ? "button" : undefined}
       disabled={disabled}
       onClick={(event) => {
-        if (!isInteractive) return;
+        if (!isInteractive || disabled) return;
         event.stopPropagation();
         onClick();
       }}
-      className={`group flex min-h-22.5 flex-col justify-between border p-3 text-left transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-40
-      ${isInteractive ? `cursor-pointer ${styles.card}` : `cursor-default ${styles.cardStatic}`}`}>
-      <div className="flex items-center justify-between gap-2">
+      className={`group relative flex flex-col justify-between border p-3 text-left transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-40
+    ${isInteractive ? `min-h-24 cursor-pointer ${styles.card}` : `min-h-20 sm:min-h-16 cursor-default ${styles.cardStatic}`}`}>
+      <div className="flex items-start justify-between gap-2">
         <div className="flex min-w-0 items-center gap-2.5">
           <span
             className={`flex h-6 w-6 shrink-0 items-center justify-center border transition-transform duration-300
-          ${isInteractive ? "group-hover:-rotate-3 group-hover:scale-105" : ""} ${styles.cardIcon}`}>
+          ${isInteractive && !disabled ? "group-hover:-rotate-3 group-hover:scale-105" : ""} ${styles.cardIcon}`}>
             {icon}
           </span>
           <span
-            className={`truncate text-[10px] font-bold uppercase tracking-wide ${styles.cardValue || styles.title}`}>
+            className={`wrap-break-word text-[10px] font-bold uppercase tracking-wide ${styles.cardValue || styles.title}`}>
             {value}
           </span>
         </div>
 
-        {actionLabel && (
-          <span
-            className={`shrink-0 text-[9px] font-bold tracking-widest transition-opacity duration-200
-          ${isInteractive ? "opacity-0 group-hover:opacity-100" : "opacity-40"} ${styles.cardText}`}>
-            {actionLabel}
-          </span>
-        )}
+        <div className="flex flex-col items-end gap-1.5 shrink-0">
+          <span className={`w-1.5 h-1.5 rounded-full shadow-sm ${dotColor}`} />
+          {actionLabel && (
+            <span
+              className={`text-[9px] font-bold tracking-widest transition-opacity duration-200
+          ${isInteractive && !disabled ? "opacity-0 group-hover:opacity-100" : "opacity-60"} ${styles.cardText}`}>
+              {actionLabel}
+            </span>
+          )}
+        </div>
       </div>
 
-      <div className="mt-2">
+      <div className={`mt-2 ${!isInteractive ? "block sm:hidden" : ""}`}>
         <div className={`text-[10px] leading-normal ${styles.cardText}`}>{description}</div>
       </div>
+
+      {!isInteractive && (
+        <span
+          className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 hidden sm:group-hover:flex flex-col items-center pointer-events-none z-100`}>
+          <span className={`w-2 h-2 rotate-45 -mb-1 border-t border-l ${styles.modal} ${styles.border || ""}`}></span>
+          <span
+            className={`text-[10px] p-2 rounded shadow-xl border whitespace-normal w-40 text-center ${styles.modal} ${styles.cardText}`}>
+            {description}
+          </span>
+        </span>
+      )}
     </Component>
   );
 }

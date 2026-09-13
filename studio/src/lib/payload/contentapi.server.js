@@ -3,7 +3,7 @@ import { cache } from "react";
 const PORTFOLIO_FETCH_TIMEOUT_MS = 20000;
 const PORTFOLIO_REVALIDATE_SECONDS = 86400;
 const BASE_URL =
-  process.env.API_BASE_URL || process.env.NEXT_PUBLIC_API_BASE_URL || "https://portfolio-backend-cjvf.onrender.com";
+  process.env.API_BASE_URL || process.env.NEXT_PUBLIC_API_BASE_URL || "https://shetty-portfolio-gateway.onrender.com";
 
 const endpointUrl = (endpoint) => new URL(endpoint, BASE_URL).toString();
 

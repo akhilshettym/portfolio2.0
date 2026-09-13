@@ -18,6 +18,7 @@ import PerformanceBootstrap from "@/components/core/PerformanceBootstrap";
 
 import { CookieProvider } from "@/context/CookieContext";
 import CookieBanner from "@/components/core/CookieBanner";
+import TierSwitcher from "@/components/core/TierSwitcher";
 import { GoogleTagManager } from "@next/third-parties/google";
 import ScrollProgress from "@/components/animations/ScrollProgress";
 
@@ -149,6 +150,7 @@ export default function RootLayout({ children }) {
           <CookieProvider>
             <ServerWarmer />
             <CookieBanner />
+            <TierSwitcher />
 
             <LenisProvider>
               <ThemeProvider>

@@ -53,14 +53,14 @@ export default function CookieBanner() {
                 <button
                   type="button"
                   onClick={handleDecline}
-                  className="px-3 py-1.5 text-[10px] sm:text-[11px] font-medium border border-black/20 bg-transparent text-black rounded-none transition-all duration-200 hover:bg-black hover:text-white hover:border-black">
+                  className="px-3 py-1.5 text-[10px] sm:text-[11px] font-medium border border-black/20 bg-transparent text-black rounded-none transition-colors duration-200 hover:bg-black hover:text-white hover:border-black">
                   Decline
                 </button>
 
                 <button
                   type="button"
                   onClick={handleAccept}
-                  className="px-3 py-1.5 text-[10px] sm:text-[11px] font-medium border border-black bg-black text-white rounded-none transition-all duration-200 hover:bg-black/80">
+                  className="px-3 py-1.5 text-[10px] sm:text-[11px] font-medium border border-black bg-black text-white rounded-none transition-colors duration-200 hover:bg-white hover:text-black">
                   Accept
                 </button>
               </div>

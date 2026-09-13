@@ -22,18 +22,14 @@ export function CookieProvider({ children }) {
   const isMounted = useSyncExternalStore(emptySubscribe, getMountedSnapshot, getServerMountedSnapshot);
 
   const [isCookieBannerReady, setIsCookieBannerReady] = useState(false);
+
+  const [showBanner, setShowBanner] = useState(false);
   const [isIntroActive, setIsIntroActive] = useState(false);
 
   const hasConsent = storedConsent === "granted" || storedConsent === "denied";
 
   const updateConsentState = useCallback((status) => {
     if (typeof window === "undefined" || !window.gtag) return;
-
-    // window.dataLayer = window.dataLayer || [];
-
-    // function gtag() {
-    //   window.dataLayer.push(arguments);
-    // }
 
     const consentStatus = status === "granted" ? "granted" : "denied";
 
@@ -71,11 +67,18 @@ export function CookieProvider({ children }) {
     setIsCookieBannerReady(false);
   }, []);
 
+  const triggerTierBanner = () => {
+    setTimeout(() => {
+      setShowBanner(true);
+    }, 5000);
+  };
+
   const handleAccept = useCallback(() => {
     localStorage.setItem(COOKIE_CONSENT, "granted");
     window.dispatchEvent(new Event("storage"));
     updateConsentState("granted");
     setIsCookieBannerReady(false);
+    triggerTierBanner();
   }, [updateConsentState]);
 
   const handleDecline = useCallback(() => {
@@ -83,6 +86,7 @@ export function CookieProvider({ children }) {
     window.dispatchEvent(new Event("storage"));
     updateConsentState("denied");
     setIsCookieBannerReady(false);
+    triggerTierBanner();
   }, [updateConsentState]);
 
   return (
@@ -97,6 +101,8 @@ export function CookieProvider({ children }) {
         updateConsentState,
         isIntroActive,
         setIsIntroActive,
+        showBanner,
+        setShowBanner,
       }}>
       {children}
     </CookieContext.Provider>

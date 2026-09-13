@@ -321,7 +321,7 @@ export default function SubjectProfile() {
               </div>
             </div>
 
-            {!isTab && (
+            {!isTab && !isMobile && (
               <div
                 className={`relative w-full min-w-0 lg:col-span-4 p-2 group shadow-inner ${styles.imgCardContainer}`}>
                 <div
