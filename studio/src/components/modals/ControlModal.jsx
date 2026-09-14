@@ -165,6 +165,7 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
                   description="Live lunar phase tracking based on current astronomical data."
                   actionLabel="PHASE"
                   styles={styles}
+                  isMobile={isMobile}
                 />
                 <ControlCard
                   status="static"
@@ -173,6 +174,7 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
                   description="Synchronized in real-time with your local atmospheric conditions."
                   actionLabel="LIVE"
                   styles={styles}
+                  isMobile={isMobile}
                 />
                 <ControlCard
                   status="static"
@@ -181,6 +183,7 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
                   description={limpDescription}
                   actionLabel="STATUS"
                   styles={styles}
+                  isMobile={isMobile}
                 />
               </div>
             </div>
@@ -199,6 +202,7 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
                   disabled={isTier2}
                   onClick={handleCloudControl}
                   styles={styles}
+                  isMobile={isMobile}
                 />
                 <ControlCard
                   status="active"
@@ -208,6 +212,7 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
                   actionLabel="REPLAY"
                   onClick={handleRestartIntroScene}
                   styles={styles}
+                  isMobile={isMobile}
                 />
                 <ControlCard
                   status="active"
@@ -217,6 +222,7 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
                   actionLabel="WIPE"
                   onClick={handleResetScene}
                   styles={styles}
+                  isMobile={isMobile}
                 />
                 <ControlCard
                   status="active"
@@ -226,6 +232,7 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
                   actionLabel="PURGE"
                   onClick={handlePurgeStorage}
                   styles={styles}
+                  isMobile={isMobile}
                 />
                 <ControlCard
                   status={!isTier2 ? "disabled" : "active"}
@@ -236,6 +243,7 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
                   disabled={!isTier2}
                   onClick={handleTierSwitch}
                   styles={styles}
+                  isMobile={isMobile}
                 />
                 <ControlCard
                   status="active"
@@ -245,6 +253,7 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
                   actionLabel="OPEN"
                   onClick={handleNavigation}
                   styles={styles}
+                  isMobile={isMobile}
                 />
               </div>
             </div>
@@ -263,7 +272,7 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
   );
 }
 
-function ControlCard({ icon, value, description, actionLabel, disabled = false, onClick, styles, status }) {
+function ControlCard({ icon, value, description, actionLabel, disabled = false, onClick, styles, status, isMobile }) {
   const isInteractive = status !== "static";
   const Component = isInteractive ? "button" : "div";
 
@@ -278,8 +287,9 @@ function ControlCard({ icon, value, description, actionLabel, disabled = false, 
         event.stopPropagation();
         onClick();
       }}
-      className={`group relative flex flex-col justify-between border p-3 text-left transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-40
-    ${isInteractive ? `min-h-24 cursor-pointer ${styles.card}` : `min-h-20 sm:min-h-16 cursor-default ${styles.cardStatic}`}`}>
+      className={`group relative flex flex-col justify-between border text-left transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-40
+    ${isMobile ? "p-2.5" : "p-3"}
+    ${isInteractive ? `${isMobile ? "min-h-12" : "min-h-24"} cursor-pointer ${styles.card}` : `${isMobile ? "min-h-12" : "min-h-20 sm:min-h-16"} cursor-default ${styles.cardStatic}`}`}>
       <div className="flex items-start justify-between gap-2">
         <div className="flex min-w-0 items-center gap-2.5">
           <span
@@ -293,7 +303,7 @@ function ControlCard({ icon, value, description, actionLabel, disabled = false, 
           </span>
         </div>
 
-        <div className="flex flex-col items-end gap-1.5 shrink-0">
+        <div className="flex flex-col items-end gap-1 shrink-0 mt-1">
           <span className={`w-1.5 h-1.5 rounded-full shadow-sm ${dotColor}`} />
           {actionLabel && (
             <span
@@ -305,9 +315,11 @@ function ControlCard({ icon, value, description, actionLabel, disabled = false, 
         </div>
       </div>
 
-      <div className={`mt-2 ${!isInteractive ? "block sm:hidden" : ""}`}>
-        <div className={`text-[10px] leading-normal ${styles.cardText}`}>{description}</div>
-      </div>
+      {!isMobile && (
+        <div className={`mt-2 ${!isInteractive ? "hidden" : ""}`}>
+          <div className={`text-[10px] leading-normal ${styles.cardText}`}>{description}</div>
+        </div>
+      )}
 
       {!isInteractive && (
         <span
