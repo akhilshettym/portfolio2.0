@@ -43,14 +43,14 @@ export const viewport = {
 };
 
 export const metadata = {
-  metadataBase: new URL("https://shetty-portfolio-studio.vercel.app"),
+  metadataBase: new URL("https://www.akhilshetty.com/"),
   title: {
     default: "Akhil Shetty | Full Stack Developer",
     template: "%s | Akhil Shetty",
   },
   description:
     "Portfolio of Akhil Shetty, a full stack developer focused on performant interfaces, scalable systems, and polished product experiences.",
-  authors: [{ name: "Akhil Shetty", url: "https://shetty-portfolio-studio.vercel.app" }],
+  authors: [{ name: "Akhil Shetty", url: "https://www.akhilshetty.com/" }],
   creator: "Akhil Shetty",
   formatDetection: {
     email: false,
@@ -97,7 +97,7 @@ const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Akhil Shetty",
-  url: "https://shetty-portfolio-studio.vercel.app",
+  url: "https://www.akhilshetty.com/",
   jobTitle: "Full Stack Developer",
   sameAs: ["https://github.com/akhilshetty"],
 };

@@ -7,6 +7,6 @@ export default function robots() {
         disallow: ["/api/"],
       },
     ],
-    sitemap: "https://shetty-portfolio-studio.vercel.app/sitemap.xml",
+    sitemap: "https://www.akhilshetty.com/sitemap.xml",
   };
 }
