@@ -2,24 +2,23 @@
 
 import { PERF_TIER } from "@/utils/storage";
 import { IoIosNuclear } from "react-icons/io";
-import React, { useState } from "react";
 import { useDeviceType } from "@/hooks/useDeviceType";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCookieConsent } from "@/context/CookieContext";
 
-const TierSwitcher = () => {
+export default function TierSwitcher() {
   const { isMobile } = useDeviceType();
   const { showBanner, setShowBanner } = useCookieConsent();
 
-  const [sysTier] = useState(() => {
-    if (typeof window === "undefined") {
-      return null;
-    }
-
-    return localStorage.getItem(PERF_TIER);
-  });
+  const sysTier = typeof window !== "undefined" ? localStorage.getItem(PERF_TIER) : null;
 
   const shouldRender = sysTier === "tier_2" && showBanner;
+
+  console.log("TierSwitcher:", {
+    sysTier,
+    showBanner,
+    shouldRender,
+  });
 
   const handleSettle = () => {
     setShowBanner(false);
@@ -55,7 +54,10 @@ const TierSwitcher = () => {
               y: -100,
               scale: 0.5,
               opacity: 0,
-              transition: { duration: 0.25, ease: "easeIn" },
+              transition: {
+                duration: 0.25,
+                ease: "easeIn",
+              },
             }}
             transition={{
               type: "spring",
@@ -67,18 +69,19 @@ const TierSwitcher = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.25, delay: 0.15 }}
+              transition={{
+                duration: 0.25,
+                delay: 0.15,
+              }}
               className="flex flex-row items-center justify-between gap-6 w-full">
-              {" "}
               <div className="flex items-center text-black min-w-0">
-                {" "}
                 <p className="text-xs sm:text-sm font-medium tracking-normal inline-flex items-center gap-1.5 text-justify">
-                  {" "}
                   <span>
                     {isMobile
                       ? "System currently running in Efficiency mode. Switch to Performance mode?"
-                      : "Your machine is running in Efficiency mode. Do you want to spin up to performance mode?"}{" "}
+                      : "Your machine is running in Efficiency mode. Do you want to spin up to performance mode?"}
                   </span>
+
                   {!isMobile && (
                     <span className="relative inline-flex items-center group cursor-pointer">
                       <IoIosNuclear className="text-sm sm:text-base text-black/70 group-hover:text-black transition-colors duration-200" />
@@ -94,6 +97,7 @@ const TierSwitcher = () => {
                   )}
                 </p>
               </div>
+
               <div className="flex flex-row items-center gap-2.5 shrink-0">
                 <button
                   onClick={handleSettle}
@@ -113,6 +117,4 @@ const TierSwitcher = () => {
       )}
     </AnimatePresence>
   );
-};
-
-export default TierSwitcher;
+}
