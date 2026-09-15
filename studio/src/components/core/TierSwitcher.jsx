@@ -2,7 +2,6 @@
 
 import { PERF_TIER } from "@/utils/storage";
 import { IoIosNuclear } from "react-icons/io";
-import React from "react";
 import { useDeviceType } from "@/hooks/useDeviceType";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCookieConsent } from "@/context/CookieContext";
