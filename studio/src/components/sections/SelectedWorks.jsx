@@ -59,7 +59,7 @@ function getServerSnapshot() {
   return false;
 }
 
-function MobileProjectModal({ project, onClose, isCompactDevice, isLargeDevice, theme }) {
+function MobileProjectModal({ project, onClose, isCompactDevice, isLargeDevice, theme, id }) {
   const skipImage = isCompactDevice || isLargeDevice;
 
   const isNewProject = !project.description || project.description.trim().toLowerCase() === "new project";
@@ -93,7 +93,6 @@ function MobileProjectModal({ project, onClose, isCompactDevice, isLargeDevice, 
         <div className={`flex items-center justify-between border-b p-4 ${borderClass}`}>
           <div className="flex flex-col">
             <span className={`text-[10px] uppercase tracking-[0.25em] ${textMuted}`}>Selected Work</span>
-            <span className="text-sm font-medium">0{project.id}</span>
           </div>
           <button
             onClick={onClose}
@@ -259,7 +258,6 @@ function FloatingProjectPreview({ project, cardAnchor, buttonAnchor, onHold, onR
                 <div className="absolute inset-0 flex flex-col justify-between p-7 z-10">
                   <div className="flex items-center justify-between">
                     <span className="text-xs uppercase tracking-[0.25em] opacity-70">Selected Work</span>
-                    <span className="text-sm opacity-60">0{project.id}</span>
                   </div>
 
                   <div>
@@ -430,7 +428,7 @@ export default function SelectedWorks({ initialProjects }) {
   }, [hasInitialProjects, initialProjects]);
 
   return (
-    <div className={`relative w-full overflow-hidden transition-colors px-10 duration-500 ${sectionBg}`}>
+    <div className={`relative w-full overflow-hidden transition-colors px-5 duration-500 ${sectionBg}`}>
       <div className={`mx-auto max-w-[1600px] py-10 ${isMobile ? "" : "px-10"}`}>
         <div className="mb-5">
           <div className="relative px-10 py-2 text-xs tracking-widest">

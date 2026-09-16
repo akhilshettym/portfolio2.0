@@ -49,7 +49,7 @@ const MarqueeLine = ({ text, large }) => {
   const { theme } = useTheme();
   const { textColor, dotColor } = getFooterMarqueeStyles(theme);
 
-  const marqueeAnimation = large ? { x: [0, -2400] } : { x: [-2400, 0] };
+  const marqueeAnimation = large ? { x: [-2400, 0] } : { x: [0, -2400] };
 
   return (
     <div className="relative overflow-hidden">
@@ -567,6 +567,7 @@ const Footer = () => {
                   </div>
                 </div>
 
+                {!isMobile && 
                 <div
                   className={`flex h-full w-full flex-col gap-4 p-6 shadow-sm border rounded-md transition-colors duration-500 ${styles.panelBg} ${styles.border} md:w-[40%]`}>
                   <div
@@ -647,6 +648,7 @@ const Footer = () => {
                     </div>
                   </div>
                 </div>
+                }
               </div>
             </div>
 

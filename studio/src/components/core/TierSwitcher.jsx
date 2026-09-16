@@ -14,12 +14,6 @@ export default function TierSwitcher() {
 
   const shouldRender = sysTier === "tier_2" && showBanner;
 
-  console.log("TierSwitcher:", {
-    sysTier,
-    showBanner,
-    shouldRender,
-  });
-
   const handleSettle = () => {
     setShowBanner(false);
   };
