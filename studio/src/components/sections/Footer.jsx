@@ -567,88 +567,88 @@ const Footer = () => {
                   </div>
                 </div>
 
-                {!isMobile && 
-                <div
-                  className={`flex h-full w-full flex-col gap-4 p-6 shadow-sm border rounded-md transition-colors duration-500 ${styles.panelBg} ${styles.border} md:w-[40%]`}>
+                {!isMobile && (
                   <div
-                    className={`h-[35%] rounded-md p-4 flex flex-col md:flex-row gap-4 w-full transition-colors duration-500 ${styles.panelHeader}`}>
-                    <div className="w-full md:w-[50%] p-3">
-                      <video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        width={380}
-                        height={35}
-                        aria-hidden="true"
-                        className={`w-full h-auto object-contain transition-all duration-500 ${styles.imageBlend}`}>
-                        <source src="/footer/animated_blob_gloop.mp4" type="video/mp4" />
-                      </video>
-                    </div>
-
+                    className={`flex h-full w-full flex-col gap-4 p-6 shadow-sm border rounded-md transition-colors duration-500 ${styles.panelBg} ${styles.border} md:w-[40%]`}>
                     <div
-                      className={`w-full md:w-[50%] rounded-md border p-3 transition-colors duration-500 flex items-center gap-4 ${styles.panelBg} ${styles.border} ${styles.textPrimary}`}>
-                      <div className="flex w-[50%] items-center py-2 justify-start">
-                        <FooterAscii className="w-full" />
+                      className={`h-[35%] rounded-md p-4 flex flex-col md:flex-row gap-4 w-full transition-colors duration-500 ${styles.panelHeader}`}>
+                      <div className="w-full md:w-[50%] p-3">
+                        <video
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          width={380}
+                          height={35}
+                          aria-hidden="true"
+                          className={`w-full h-auto object-contain transition-all duration-500 ${styles.imageBlend}`}>
+                          <source src="/footer/animated_blob_gloop.mp4" type="video/mp4" />
+                        </video>
                       </div>
 
-                      <div className="flex h-full flex-1 items-center justify-center">
-                        <div className="flex flex-col justify-center text-justify">
-                          <span className="text-[7px] leading-normal opacity-40">
-                            Usually somewhere between coffee, code & curiosity.
-                            {/* Probably overthinking the details, always curious about what&apos;s */}
-                            {/* I like making things that feel simple, sometimes too simple.  */}
-                            Still figuring it out {":)"} One thing at a time. Never really done experimenting.
-                          </span>
+                      <div
+                        className={`w-full md:w-[50%] rounded-md border p-3 transition-colors duration-500 flex items-center gap-4 ${styles.panelBg} ${styles.border} ${styles.textPrimary}`}>
+                        <div className="flex w-[50%] items-center py-2 justify-start">
+                          <FooterAscii className="w-full" />
+                        </div>
+
+                        <div className="flex h-full flex-1 items-center justify-center">
+                          <div className="flex flex-col justify-center text-justify">
+                            <span className="text-[7px] leading-normal opacity-40">
+                              Usually somewhere between coffee, code & curiosity.
+                              {/* Probably overthinking the details, always curious about what&apos;s */}
+                              {/* I like making things that feel simple, sometimes too simple.  */}
+                              Still figuring it out {":)"} One thing at a time. Never really done experimenting.
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div
-                    className={`relative flex h-auto min-h-[65%] flex-col justify-between overflow-hidden rounded-md border p-3 sm:p-5 transition-colors duration-500 ${styles.border}`}>
-                    <div className="pointer-events-none absolute right-0 top-0 h-24 w-24 sm:h-32 sm:w-32 rounded-full blur-3xl" />
+                    <div
+                      className={`relative flex h-auto min-h-[65%] flex-col justify-between overflow-hidden rounded-md border p-3 sm:p-5 transition-colors duration-500 ${styles.border}`}>
+                      <div className="pointer-events-none absolute right-0 top-0 h-24 w-24 sm:h-32 sm:w-32 rounded-full blur-3xl" />
 
-                    <div className="relative z-10 flex flex-col gap-2 sm:gap-3">
-                      <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                        {SOCIALS.map((social) => {
-                          const Icon = social.icon;
+                      <div className="relative z-10 flex flex-col gap-2 sm:gap-3">
+                        <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                          {SOCIALS.map((social) => {
+                            const Icon = social.icon;
 
-                          return (
-                            <Link
-                              key={social.label}
-                              href={social.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={`group relative block overflow-hidden rounded-md px-2 py-2 sm:px-4 sm:py-2 transition-all duration-300 hover:-translate-y-1 ${styles.socialCard}`}>
-                              <div className="relative flex items-center gap-2 sm:gap-3">
-                                <div
-                                  className={`${styles.iconBoxBase} ${styles.iconBox} shrink-0 flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center`}>
-                                  <Icon className="text-xs sm:text-base" />
+                            return (
+                              <Link
+                                key={social.label}
+                                href={social.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`group relative block overflow-hidden rounded-md px-2 py-2 sm:px-4 sm:py-2 transition-all duration-300 hover:-translate-y-1 ${styles.socialCard}`}>
+                                <div className="relative flex items-center gap-2 sm:gap-3">
+                                  <div
+                                    className={`${styles.iconBoxBase} ${styles.iconBox} shrink-0 flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center`}>
+                                    <Icon className="text-xs sm:text-base" />
+                                  </div>
+
+                                  <span
+                                    className={`min-w-0 truncate text-[9px] sm:text-xs font-bold uppercase tracking-wide sm:tracking-wider transition-colors duration-300 ${styles.textSecondary}`}>
+                                    {social.label}
+                                  </span>
                                 </div>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
 
-                                <span
-                                  className={`min-w-0 truncate text-[9px] sm:text-xs font-bold uppercase tracking-wide sm:tracking-wider transition-colors duration-300 ${styles.textSecondary}`}>
-                                  {social.label}
-                                </span>
-                              </div>
-                            </Link>
-                          );
-                        })}
+                      <div className="w-full sm:w-auto flex justify-end">
+                        <CustomButton
+                          title={`${isMobile ? "Let's Connect" : "Let's Get In Contact"}`}
+                          onClick={handleNavigation}
+                          width={isMobile ? 200 : 300}
+                          height={40}
+                        />
                       </div>
                     </div>
-
-                    <div className="w-full sm:w-auto flex justify-end">
-                      <CustomButton
-                        title={`${isMobile ? "Let's Connect" : "Let's Get In Contact"}`}
-                        onClick={handleNavigation}
-                        width={isMobile ? 200 : 300}
-                        height={40}
-                      />
-                    </div>
                   </div>
-                </div>
-                }
+                )}
               </div>
             </div>
 
