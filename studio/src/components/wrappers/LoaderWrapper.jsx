@@ -4,8 +4,8 @@ import "@/styles/intro_entrance.css";
 import { INTRO_SEEN } from "@/utils/storage";
 import Loader from "@/components/animations/Loader";
 import PageReveal from "@/components/animations/PageReveal";
-import CinematicIntro from "@/components/animations/CinematicIntro";
 import { createContext, useEffect, useRef, useState } from "react";
+import CinematicIntro from "@/components/animations/CinematicIntro";
 
 export const LoadingContext = createContext();
 

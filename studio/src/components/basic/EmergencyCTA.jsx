@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import "@/styles/emergency_cta.css";
 import { goToTop } from "@/utils/functions";
 import { useRouter } from "next/navigation";

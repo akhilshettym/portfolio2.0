@@ -273,7 +273,7 @@ export default function ContentPage() {
                     </button>
                     <button
                       onClick={() => openDeleteModal(exp)}
-                      className="flex-1 border border-black px-3 py-1.5 text-xs font-mono uppercase hover:bg-red-500 hover:text-white hover:border-red-500 transition-colors">
+                      className="flex-1 border border-black px-3 py-1.5 text-xs font-mono uppercase hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors">
                       Delete
                     </button>
                   </div>
@@ -399,7 +399,7 @@ export default function ContentPage() {
                         </label>
                         <input
                           id="work-image"
-                          type="url"
+                          type="text"
                           placeholder="https://..."
                           className="w-full border border-black p-2 focus:outline-none focus:bg-gray-50"
                           value={formData.image || ""}
