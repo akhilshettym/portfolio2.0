@@ -482,7 +482,7 @@ export const SOCIALS = [
   {
     icon: FaGithub,
     label: "GitHub",
-    href: "https://github.com/akhilshettyym",
+    href: "https://github.com/akhilshettym",
   },
   {
     icon: FaLinkedin,

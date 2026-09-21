@@ -25,7 +25,7 @@ function useIsMounted() {
   );
 }
 
-const GithubGraphQl = ({ username = "akhilshettyym", forceTriggerAnimation }) => {
+const GithubGraphQl = ({ username = "akhilshettym", forceTriggerAnimation }) => {
   const { theme } = useTheme();
   const { isMobile } = useDeviceType();
   const { isTier2 } = usePerformanceTier();
@@ -596,12 +596,12 @@ const GithubGraphQl = ({ username = "akhilshettyym", forceTriggerAnimation }) =>
               </div>
 
               <Link
-                href="https://github.com/akhilshettyym"
+                href="https://github.com/akhilshettym"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-1.5 transition-colors duration-300 hover:opacity-100"
                 aria-label="Visit my GitHub profile">
-                <span className="lowercase">akhilshettyym</span>
+                <span className="lowercase">akhilshettym</span>
                 <FaGithub size={15} />
               </Link>
             </div>

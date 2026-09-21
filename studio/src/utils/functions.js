@@ -474,12 +474,12 @@ export const logGithub = () => {
         <span className="text-emerald-400"> window down to my github contributions section...</span>
         <span className="text-white">
           <a
-            href="https://github.com/akhilshettyym"
+            href="https://github.com/akhilshettym"
             target="_blank"
             rel="noreferrer"
             className="text-cyan-500 hover:underline">
             {" "}
-            github.com/akhilshettyym ↗{" "}
+            github.com/akhilshettym ↗{" "}
           </a>
           <p className="leading-relaxed text-justify">
             Check out my public development tracks and open-source activities on GitHub. As for my work contributions —
@@ -686,11 +686,11 @@ export const logSocials = () => {
         <div>
           <span className="inline-block w-20 text-emerald-500 font-bold">$github</span>
           <a
-            href="https://github.com/akhilshettyym"
+            href="https://github.com/akhilshettym"
             target="_blank"
             rel="noreferrer"
             className="text-cyan-500 hover:underline">
-            github.com/akhilshettyym ↗
+            github.com/akhilshettym ↗
           </a>
         </div>
         <div>
