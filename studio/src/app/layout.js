@@ -99,7 +99,7 @@ const personSchema = {
   name: "Akhil Shetty",
   url: "https://www.akhilshetty.com/",
   jobTitle: "Full Stack Developer",
-  sameAs: ["https://github.com/akhilshetty"],
+  sameAs: ["https://github.com/akhilshettyym"],
 };
 
 export default function RootLayout({ children }) {
