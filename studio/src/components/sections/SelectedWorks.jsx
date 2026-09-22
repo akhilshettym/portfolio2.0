@@ -29,10 +29,8 @@ function getButtonPosition(clientX, clientY) {
   if (typeof window === "undefined") return { x: 0, y: 0 };
   const vw = window.innerWidth;
   const vh = window.innerHeight;
-  const cursorOffsetX = 16;
-  const cursorOffsetY = 16;
-  let x = clientX - CTA_WIDTH / 2 + cursorOffsetX;
-  let y = clientY - CTA_HEIGHT / 2 + cursorOffsetY;
+  let x = clientX - CTA_WIDTH / 2;
+  let y = clientY - CTA_HEIGHT / 2;
   x = clamp(x, EDGE_PADDING, vw - CTA_WIDTH - EDGE_PADDING);
   y = clamp(y, EDGE_PADDING, vh - CTA_HEIGHT - EDGE_PADDING);
 
@@ -529,33 +527,35 @@ export default function SelectedWorks({ initialProjects }) {
         </div>
       </div>
 
-      <AnimatePresence mode="sync" initial={false}>
-        {!renderPopupModal && activeProject !== null && projects[activeProject] && (
-          <FloatingProjectPreview
-            key={projects[activeProject].id}
-            project={projects[activeProject]}
-            cardAnchor={cardAnchor}
-            buttonAnchor={buttonAnchor}
-            onHold={cancelClear}
-            onRelease={scheduleClear}
-            theme={theme}
-          />
-        )}
-      </AnimatePresence>
-
       {isPortalReady &&
         createPortal(
-          <AnimatePresence>
-            {renderPopupModal && mobileModalProject !== null && (
-              <MobileProjectModal
-                project={mobileModalProject}
-                onClose={() => setMobileModalProject(null)}
-                isCompactDevice={isCompactDevice}
-                isLargeDevice={isLargeDevice}
-                theme={theme}
-              />
-            )}
-          </AnimatePresence>,
+          <>
+            <AnimatePresence mode="sync" initial={false}>
+              {!renderPopupModal && activeProject !== null && projects[activeProject] && (
+                <FloatingProjectPreview
+                  key={projects[activeProject].id}
+                  project={projects[activeProject]}
+                  cardAnchor={cardAnchor}
+                  buttonAnchor={buttonAnchor}
+                  onHold={cancelClear}
+                  onRelease={scheduleClear}
+                  theme={theme}
+                />
+              )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+              {renderPopupModal && mobileModalProject !== null && (
+                <MobileProjectModal
+                  project={mobileModalProject}
+                  onClose={() => setMobileModalProject(null)}
+                  isCompactDevice={isCompactDevice}
+                  isLargeDevice={isLargeDevice}
+                  theme={theme}
+                />
+              )}
+            </AnimatePresence>
+          </>,
           document.body,
         )}
     </div>
