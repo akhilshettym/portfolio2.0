@@ -127,8 +127,8 @@ const TrackTrail = memo(function TrackTrail({ banners = DEFAULT_BANNERS, initial
 
           <div className="relative z-10 mb-3 h-15 w-15">
             <Image
-              src="/trailhead/triple_star_ranger.svg"
-              alt="Triple Star Ranger"
+              src="/trailhead/four_star_ranger.png"
+              alt="Four Star Ranger"
               fill
               sizes="60px"
               priority
