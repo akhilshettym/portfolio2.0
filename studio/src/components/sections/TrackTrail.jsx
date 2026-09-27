@@ -94,7 +94,7 @@ const TrackTrail = memo(function TrackTrail({ banners = DEFAULT_BANNERS, initial
   return (
     <div
       aria-labelledby="trailhead-title"
-      className={`w-full px-4 pb-15 md:px-8 lg:px-12 transition-colors duration-500 ${styles.wrapper}`}>
+      className={`w-full px-4 pb-5 md:px-8 lg:px-12 transition-colors duration-500 ${styles.wrapper}`}>
       <div className="mb-3 flex items-center justify-between px-4 sm:px-6 md:px-10">
         <h2
           id="trailhead-title"
