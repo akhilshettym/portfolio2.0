@@ -16,11 +16,11 @@ const BASE_BANNERS = ["/trailhead/champion.svg", "/trailhead/innovator.svg"];
 const DEFAULT_BANNERS = Array.from({ length: 4 }, () => BASE_BANNERS).flat();
 
 const EMPTY_TRAILHEAD = {
-  rankTitle: "Triple Star Ranger",
-  superbadges: 0,
-  points: 0,
-  badges: 0,
-  trails: 0,
+  rankTitle: "Four Star Ranger",
+  superbadges: 14,
+  points: "2,00,200",
+  badges: 479,
+  trails: 67,
 };
 
 const TrackTrail = memo(function TrackTrail({ banners = DEFAULT_BANNERS, initialTrailhead }) {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "@/context/ThemeContext";
+import { ACH_FALLBACK_DATA } from "@/utils/basic";
 import { getCardStackStyles } from "@/utils/swatch";
 import { useDeviceType } from "@/hooks/useDeviceType";
 import FloatingCard from "@/components/basic/FloatingCard";
@@ -12,7 +13,9 @@ import { motion, useMotionTemplate, useScroll, useSpring, useTransform } from "f
 function CardStackReveal({ initialAchievements }) {
   const sectionRef = useRef(null);
   const hasInitialAchievements = Array.isArray(initialAchievements);
-  const [data, setData] = useState(() => (Array.isArray(initialAchievements) ? initialAchievements : []));
+  const [data, setData] = useState(() =>
+    Array.isArray(initialAchievements) ? initialAchievements : ACH_FALLBACK_DATA,
+  );
   const [hoveredCard, setHoveredCard] = useState(-1);
 
   const { theme } = useTheme();

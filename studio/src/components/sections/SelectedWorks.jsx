@@ -10,8 +10,8 @@ import { FaArrowUpRightFromSquare, FaXmark } from "react-icons/fa6";
 import { getWorks, seedPortfolioCache } from "@/lib/payload/contentapi";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { getWorkFloatStyles, getWorkMobile, getWorkStyles } from "@/utils/swatch";
-import { CARD_WIDTH, CARD_HEIGHT, CTA_WIDTH, CTA_HEIGHT, EDGE_PADDING } from "@/utils/basic";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { CARD_WIDTH, CARD_HEIGHT, CTA_WIDTH, CTA_HEIGHT, EDGE_PADDING, WORKS_FALLBACK_DATA } from "@/utils/basic";
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(value, max));
@@ -320,7 +320,7 @@ export default function SelectedWorks({ initialProjects }) {
   const renderPopupModal = isMobile || isTier2;
 
   const hasInitialProjects = Array.isArray(initialProjects);
-  const [projects, setProjects] = useState(() => (hasInitialProjects ? initialProjects : []));
+  const [projects, setProjects] = useState(() => (hasInitialProjects ? initialProjects : WORKS_FALLBACK_DATA));
   const [isLoading, setIsLoading] = useState(() => !hasInitialProjects);
 
   const [activeProject, setActiveProject] = useState(null);
@@ -488,7 +488,7 @@ export default function SelectedWorks({ initialProjects }) {
                   className={`group relative cursor-pointer border-t outline-none select-none ${borderColor}`}>
                   <div className={`grid grid-cols-12 gap-6 ${renderPopupModal ? "py-5" : "px-10 py-5"}`}>
                     <div className="col-span-12 md:col-span-5">
-                      <h3 className="text-2xl font-medium md:text-4xl"> {project.title} </h3>
+                      <h3 className="text-2xl font-bold uppercase text-[clamp(2em,2.5vw,2rem)] "> {project.title} </h3>
                       <p className="mt-2 text-sm opacity-70"> {project.tagline} </p>
                     </div>
 
@@ -496,7 +496,14 @@ export default function SelectedWorks({ initialProjects }) {
                       <div className="flex items-center justify-between md:justify-end h-full">
                         <div className="relative w-28 h-15 md:w-46 md:h-18 overflow-hidden rounded border border-current/20 bg-neutral-500/5 aspect-video shrink-0">
                           {project.image ? (
-                            <Image src={project.image} alt={project.title} fill unoptimized className="object-cover" />
+                            <Image
+                              src={project.image}
+                              alt={project.title}
+                              fill
+                              unoptimized
+                              priority
+                              className="object-cover"
+                            />
                           ) : (
                             <div className="flex h-full w-full items-center justify-center p-2 text-center">
                               <h1 className="text-sm font-normal uppercase tracking-wider text-neutral-400 md:text-xs">

@@ -1,9 +1,9 @@
 import { cache } from "react";
+import { ACH_FALLBACK_DATA, EDU_FALLBACK_DATA, EXP_FALLBACK_DATA, WORKS_FALLBACK_DATA } from "@/utils/basic";
 
 const PORTFOLIO_FETCH_TIMEOUT_MS = 20000;
 const PORTFOLIO_REVALIDATE_SECONDS = 86400;
-const BASE_URL =
-  process.env.API_BASE_URL || process.env.NEXT_PUBLIC_API_BASE_URL || "https://shetty-portfolio-gateway.onrender.com";
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://shetty-portfolio-gateway.onrender.com";
 
 const endpointUrl = (endpoint) => new URL(endpoint, BASE_URL).toString();
 
@@ -50,17 +50,17 @@ export const getPortfolioData = cache(async () => {
 
 export const getAchievements = cache(async () => {
   const data = await getPortfolioData();
-  return Array.isArray(data?.achievements) ? data.achievements : [];
+  return Array.isArray(data?.achievements) ? data.achievements : ACH_FALLBACK_DATA;
 });
 
 export const getEducations = cache(async () => {
   const data = await getPortfolioData();
-  return Array.isArray(data?.educations) ? data.educations : [];
+  return Array.isArray(data?.educations) ? data.educations : EDU_FALLBACK_DATA;
 });
 
 export const getExperiences = cache(async () => {
   const data = await fetchEndpoint("/api/user/experiences");
-  return Array.isArray(data) ? data : [];
+  return Array.isArray(data) ? data : EXP_FALLBACK_DATA;
 });
 
 export const getTrailhead = cache(async () => {
@@ -70,7 +70,7 @@ export const getTrailhead = cache(async () => {
 
 export const getWorks = cache(async () => {
   const data = await fetchEndpoint("/api/user/works");
-  return Array.isArray(data) ? data : [];
+  return Array.isArray(data) ? data : WORKS_FALLBACK_DATA;
 });
 
 export const getInfoPageContent = cache(async () => {
@@ -87,7 +87,10 @@ export const getWorkPageContent = cache(async () => {
   ]);
 
   return {
-    educations: Array.isArray(portfolioData?.educations) ? portfolioData.educations : [],
+    educations:
+      Array.isArray(portfolioData?.educations) && portfolioData.educations.length > 0
+        ? portfolioData.educations
+        : EDU_FALLBACK_DATA,
     experiences,
     trailhead,
     works,

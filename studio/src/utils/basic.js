@@ -1217,3 +1217,164 @@ export const REVEAL_TRANSITION = {
   duration: 0.8,
   ease: [0.22, 1, 0.36, 1],
 };
+
+/* Achievements */
+export const ACH_FALLBACK_DATA = [
+  {
+    title: "Impact Highlights",
+    caption: "Milestones That Made a Difference",
+    description:
+      "A curated showcase of measurable outcomes, reflecting consistent execution, ownership, and deep impact across key initiatives.",
+    year: "2021-2025",
+    href: "https://github.com/akhilshettyym/My-Professional-Journey/tree/main/01_ImpactHighlights",
+    cta: "View highlights",
+  },
+  {
+    title: "Technical Certifications",
+    caption: "Continuous Learning, Verified Skills",
+    description:
+      "Formal industry credentials validating technical knowledge, practical applications, and commitment to mastering modern technologies.",
+    year: "2024-2025",
+    href: "https://github.com/akhilshettyym/My-Professional-Journey/tree/main/02_TechnicalCertifications",
+    cta: "See certificates",
+  },
+  {
+    title: "Co-Curricular Recognition",
+    caption: "Leadership Beyond Academics",
+    description:
+      "Honored recognition earned through leadership, teamwork, and active participation in tech communities, hackathons, and global events.",
+    year: "2022-2025",
+    href: "https://github.com/akhilshettyym/My-Professional-Journey/tree/main/03_CoCurricularRecognition",
+    cta: "Explore recog.",
+  },
+  {
+    title: "Academic Records",
+    caption: "A Foundation of Excellence",
+    description:
+      "A rigorous academic journey driven by absolute consistency, discipline, and a pursuit of strong foundational knowledge in computer science.",
+    year: "2019-2026",
+    href: "https://github.com/akhilshettyym/My-Professional-Journey/tree/main/04_AcademicRecords",
+    cta: "Open record",
+  },
+];
+
+/* Experience */
+export const EXP_FALLBACK_DATA = [
+  {
+    _id: "6a7f1d710b9968d5e2976900",
+    title: "Information Technology Trainee",
+    company: "Global Industrial Pvt. Ltd.",
+    timeline: "17th Jun - Present",
+    type: "Full Time",
+    description: "Optimized performance while expanding into backend architecture, SSR, and APIs.",
+    tags: ["Nextjs", "Nodejs", "MongoDb", "Expressjs", "Tailwind"],
+    tilt: 0,
+    createdAt: "2026-08-14T13:51:45.104Z",
+    updatedAt: "2026-08-18T08:42:27.082Z",
+    __v: 0,
+  },
+  {
+    _id: "6a7f1d290b9968d5e29768ff",
+    title: "Information Technology Intern",
+    company: "Global Industrial Pvt. Ltd.",
+    timeline: "3rd Feb - 16th Jun 2025",
+    type: "Internship",
+    description: "Mastered core web technologies and modern frameworks to build responsive interfaces.",
+    tags: ["HTML", "CSS", "JavaScript", "React", "Git"],
+    tilt: 0,
+    createdAt: "2026-08-14T13:50:33.106Z",
+    updatedAt: "2026-08-14T13:50:33.106Z",
+    __v: 0,
+  },
+  {
+    _id: "6a7f1cd10b9968d5e29768fe",
+    title: "Junior Graphic Designer Intern",
+    company: "Karanji Infotech Pvt. Ltd.",
+    timeline: "6th Nov - 5th Dec 2023",
+    type: "Internship",
+    description: "Designed high-impact marketing visuals, social graphics, and promotional brochures collaboratively.",
+    tags: ["adobe animate", "blender"],
+    tilt: 0,
+    createdAt: "2026-08-14T13:49:05.910Z",
+    updatedAt: "2026-08-14T13:49:05.910Z",
+    __v: 0,
+  },
+];
+
+/* Education */
+export const EDU_FALLBACK_DATA = [
+  {
+    title: "Secondary Schooling (10th)",
+    college: "Canara High School, Mangaluru",
+    major: "General",
+    score: "87.84%",
+    timeline: "2018 - 2019",
+    variant: "standard",
+  },
+  {
+    title: "Pre-University",
+    college: "Boscoss Pre-University College, Mangaluru",
+    major: "Physics, Chemistry, Math, Biology (PCMB)",
+    score: "95.17%",
+    timeline: "2019 - 2021",
+    variant: "standard",
+  },
+  {
+    title: "Bachelor of Engineering",
+    college: "St. Joseph Engineering College, Mangaluru",
+    major: "Computer Science and Engineering",
+    score: "8.76 CGPA",
+    timeline: "2021 - 2025",
+    variant: "standard",
+  },
+  {
+    title: "IUCEE Annual Student Expo 2025",
+    college: "VNRVJIET, Hyderabad",
+    major: "Cloud-Based Smart Baby Monitoring System",
+    score: "Rep. SJEC at ICTIEE 2025",
+    timeline: "7th-8th Jan, 2025",
+    variant: "inverted",
+  },
+  {
+    title: "TEDX SJEC",
+    college: "St. Joseph Engineering College, Mangaluru",
+    major: "Stage and Venue Committee Head",
+    score: "Design and Build",
+    timeline: "14th Dec, 2024",
+    variant: "inverted",
+  },
+];
+
+/* Projects */
+export const WORKS_FALLBACK_DATA = [
+  {
+    _id: "6aa165f69065b6678d7f8ef8",
+    title: "Staffle",
+    tagline: "Employee Management System",
+    when: "2026",
+    type: "FullStack",
+    image: "/projects/staffle.png",
+    url: "",
+    stack: ["MongoDB", "ExpressJs", "ReactJs", "NodeJs"],
+    description:
+      "Staffle is a full-stack Employee & Organization Management System built using the MERN stack. It supports multi-organization workflows with Super Admin, Admin, and Employee role-based control, task lifecycle management, and centralized organization governance.\n",
+    createdAt: "2026-09-09T13:58:14.287Z",
+    updatedAt: "2026-09-26T16:15:06.279Z",
+    __v: 0,
+  },
+  {
+    _id: "6aa163d49065b6678d7f8ef7",
+    title: "Portfolio",
+    tagline: "My original playground, (legacy).",
+    when: "2024",
+    type: "Frontend",
+    image: "/projects/portfolio.png",
+    url: "https://akhilshettym.vercel.app",
+    stack: ["React", "Three", "gsap"],
+    description:
+      "A portfolio website built with React and GSAP. Honestly? I dove into this project knowing absolutely nothing about either of them. It was a chaotic trial-by-fire, but I wanted to see how far I could push web animations, learn on the fly, and build a digital playground from scratch.",
+    createdAt: "2026-09-09T13:49:08.695Z",
+    updatedAt: "2026-09-26T16:15:55.151Z",
+    __v: 0,
+  },
+];

@@ -4,6 +4,7 @@ import "@/styles/my_experience.css";
 import { useTheme } from "@/context/ThemeContext";
 import { useDeviceType } from "@/hooks/useDeviceType";
 import React, { useRef, useState, useEffect } from "react";
+import { EDU_FALLBACK_DATA, EXP_FALLBACK_DATA } from "@/utils/basic";
 import { getMyExperienceStyles, getMarqueeCardStyle } from "@/utils/swatch";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { getEducations, getExperiences, seedPortfolioCache } from "@/lib/payload/contentapi";
@@ -19,8 +20,13 @@ export default function MyExperience({ initialExperiences, initialEducations }) 
   const hasInitialExperiences = Array.isArray(initialExperiences);
   const hasInitialEducations = Array.isArray(initialEducations);
 
-  const [expData, setExpData] = useState(() => (Array.isArray(initialExperiences) ? initialExperiences : []));
-  const [eduData, setEduData] = useState(() => (Array.isArray(initialEducations) ? initialEducations : []));
+  const [expData, setExpData] = useState(() =>
+    Array.isArray(initialExperiences) ? initialExperiences : EXP_FALLBACK_DATA,
+  );
+  const [eduData, setEduData] = useState(() =>
+    Array.isArray(initialEducations) ? initialEducations : EDU_FALLBACK_DATA,
+  );
+
   const [scrollRange, setScrollRange] = useState(0);
 
   const { isMobile, isTab } = useDeviceType();
