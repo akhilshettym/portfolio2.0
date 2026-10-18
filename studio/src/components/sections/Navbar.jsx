@@ -109,7 +109,6 @@ const Navbar = () => {
     mobileNavActiveClass,
     mobileNavInactiveClass,
     consoleSlideClass,
-    mobileMenuIconGroupClass,
     marqueeFadeLeft,
     marqueeFadeRight,
     marqueeDiv1,
@@ -223,9 +222,9 @@ const Navbar = () => {
         <div className="w-full px-3 py-6 sm:hidden">
           <div className="flex items-center justify-between gap-2">
             <div className="flex min-w-0 flex-1 items-center gap-2">
-              <div className="relative h-10 w-10 shrink-0 cursor-pointer" onClick={() => (window.location.href = "/")}>
+              <Link href="/" className="relative h-10 w-10 shrink-0 block">
                 <NavbarLogo />
-              </div>
+              </Link>
 
               <nav aria-label="Mobile Navigation" className="flex min-w-0 gap-1 overflow-hidden">
                 {navItems.map((item) => (
@@ -275,13 +274,11 @@ const Navbar = () => {
           <div className="flex items-center">
             <div className="flex shrink-0 items-center gap-3">
               <div className="opacity-0 animate-[navbar-enter_0.65s_cubic-bezier(0.16,1,0.3,1)_0.1s_forwards]">
-                <div
-                  className="relative flex h-12 w-12 cursor-pointer items-center justify-center"
-                  onClick={() => (window.location.href = "/")}>
+                <Link href="/" className="relative flex h-12 w-12 items-center justify-center">
                   <div className="relative h-full w-full overflow-hidden rounded-md">
                     <NavbarLogo />
                   </div>
-                </div>
+                </Link>
               </div>
 
               <nav

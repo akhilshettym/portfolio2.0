@@ -1348,6 +1348,21 @@ export const EDU_FALLBACK_DATA = [
 /* Projects */
 export const WORKS_FALLBACK_DATA = [
   {
+    _id: "6ad4dbc1999d7c18e6a7e996",
+    title: "Apex Sync",
+    tagline: "High-concurrency Ticketing System",
+    when: "Present",
+    type: "Full Stack",
+    image: "/projects/apexsync.png",
+    url: "",
+    stack: ["docker", "java-21", "spring-boot", "redis", "nextjs", "reactjs", "tailwindcss"],
+    description:
+      "A production-grade, high-concurrency event reservation system engineered to handle high-volume flash sales. It features real-time distributed seat locking, dynamic pricing, and strict role-based access control built on enterprise-standard cloud infrastructure.",
+    createdAt: "2026-10-18T14:46:25.822Z",
+    updatedAt: "2026-10-18T14:46:25.822Z",
+    __v: 0,
+  },
+  {
     _id: "6aa165f69065b6678d7f8ef8",
     title: "Staffle",
     tagline: "Employee Management System",
