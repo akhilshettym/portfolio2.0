@@ -449,7 +449,7 @@ export default function SelectedWorks({ initialProjects }) {
               className={`flex w-full items-baseline justify-between whitespace-nowrap text-[clamp(3rem,5vw,3rem)] md:text-[clamp(4rem,5vw,2rem)] font-black leading-[0.82] tracking-[-0.09em] will-change-transform ${headerText}`}
               style={{ fontFeatureSettings: '"ss01" on, "ss02" on' }}>
               <span>. WORKS</span>
-              <span className="ml-auto mr-5 text-sm tracking-normal"> 24-26 </span>
+              <span className="ml-auto mr-5 text-sm tracking-normal"> 2024 - present </span>
             </h1>
           </div>
         </div>
