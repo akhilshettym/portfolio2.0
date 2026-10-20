@@ -59,6 +59,12 @@ function BubbleScene() {
     let frame = 0;
     let cachedIntersects = [];
 
+    const gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
+    if (gl) {
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+    }
+
     const scene = new THREE.Scene();
 
     const initialFogColor = isDark ? "#000000" : "#ffffff";
@@ -85,6 +91,9 @@ function BubbleScene() {
     const textures = TEXTURE_PATHS.map((name) => {
       const texture = loader.load(`/bubbles/bubbles.${name}.svg`);
       texture.colorSpace = THREE.SRGBColorSpace;
+      texture.flipY = false;
+      texture.repeat.set(1, -1);
+      texture.offset.set(0, 1);
       return texture;
     });
 

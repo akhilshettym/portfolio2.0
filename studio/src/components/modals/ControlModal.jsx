@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
-import { FiShield } from "react-icons/fi";
 import { pushToDataLayer } from "@/lib/gtm";
 import { useRouter } from "next/navigation";
 import ModeSwitch from "../basic/ModeSwitch";
@@ -19,6 +18,7 @@ import { useDeviceType } from "@/hooks/useDeviceType";
 import { getControlModalStyles } from "@/utils/swatch";
 import { AnimatePresence, motion } from "framer-motion";
 import { HiMiniPause, HiMiniPlay } from "react-icons/hi2";
+import { FiShield, FiSunrise, FiSunset } from "react-icons/fi";
 import { ASSET_CACHE, LOCATION_MODE, SCENE_CACHE } from "@/utils/storage";
 
 export default function ControlModal({ open, onClose, paused, isTier2, handleCloudControl, handleRestartIntroScene }) {
@@ -27,6 +27,7 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
   const { isMobile } = useDeviceType();
 
   const weatherData = getWeatherIconData();
+
   const moonPhase = weatherData?.getMoonPhase;
   const sceneCondition = weatherData?.getSceneCondition;
 
@@ -185,6 +186,28 @@ export default function ControlModal({ open, onClose, paused, isTier2, handleClo
                   styles={styles}
                   isMobile={isMobile}
                 />
+              </div>
+            </div>
+
+            <div
+              className={`flex items-center justify-between border-b px-4 py-2.5 text-[10px] font-semibold tracking-wide ${styles.divider} ${styles.cardText || styles.title}`}>
+              <div className="flex items-center justify-between w-full px-1">
+                <span className="flex items-center gap-1.5">
+                  <span className="opacity-60">Temp:</span>{" "}
+                  {weatherData?.temperature != null ? `${weatherData.temperature}°C` : "--"}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="opacity-60">Wind:</span>{" "}
+                  {weatherData?.windSpeed != null ? `${weatherData.windSpeed} km/h` : "--"}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <FiSunrise size={13} />
+                  {weatherData?.sunrise ? weatherData.sunrise.split("T")[1] : "--"}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <FiSunset size={13} />
+                  {weatherData?.sunset ? weatherData.sunset.split("T")[1] : "--"}
+                </span>
               </div>
             </div>
 

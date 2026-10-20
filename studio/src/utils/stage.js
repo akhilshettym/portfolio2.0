@@ -160,44 +160,46 @@ export function getLocationMode() {
 }
 
 export function getWeatherIconData() {
+  const fallbackData = {
+    temperature: null,
+    windSpeed: null,
+    sunrise: null,
+    sunset: null,
+    getMoonPhase: DEFAULT_SCENE.renderMoonPhase,
+    getSceneCondition: DEFAULT_SCENE.sceneCondition,
+  };
+
   if (typeof window === "undefined") {
-    return {
-      getMoonPhase: DEFAULT_SCENE.renderMoonPhase,
-      getSceneCondition: DEFAULT_SCENE.sceneCondition,
-    };
+    return fallbackData;
   }
 
   try {
     const mode = getLocationMode();
 
     if (mode === "denied") {
-      return {
-        getMoonPhase: DEFAULT_SCENE.renderMoonPhase,
-        getSceneCondition: DEFAULT_SCENE.sceneCondition,
-      };
+      return fallbackData;
     }
 
     const rawData = localStorage.getItem(SCENE_CACHE);
 
     if (!rawData) {
-      return {
-        getMoonPhase: DEFAULT_SCENE.renderMoonPhase,
-        getSceneCondition: DEFAULT_SCENE.sceneCondition,
-      };
+      return fallbackData;
     }
 
     const parsedData = JSON.parse(rawData);
     const innerData = parsedData?.data;
+    const weather = innerData?.weather;
 
     return {
+      temperature: weather?.temperature ?? null,
+      windSpeed: weather?.windSpeed ?? null,
+      sunrise: weather?.sunrise ?? null,
+      sunset: weather?.sunset ?? null,
       getMoonPhase: innerData?.renderMoonPhase || DEFAULT_SCENE.renderMoonPhase,
       getSceneCondition: innerData?.sceneCondition || DEFAULT_SCENE.sceneCondition,
     };
   } catch {
-    return {
-      getMoonPhase: DEFAULT_SCENE.renderMoonPhase,
-      getSceneCondition: DEFAULT_SCENE.sceneCondition,
-    };
+    return fallbackData;
   }
 }
 
@@ -251,10 +253,7 @@ export async function getWeatherScene({ forceRefresh = false } = {}) {
       moonPhase,
       sceneCondition,
       renderMoonPhase,
-
-      ...(mode === "accurate" && {
-        weather,
-      }),
+      weather,
     };
 
     writeCachedScene(result);

@@ -26,11 +26,15 @@ const montserrat = Montserrat({
   variable: "--font-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
+  preload: false,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const viewport = {
